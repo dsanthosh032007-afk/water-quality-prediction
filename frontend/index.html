@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-Powered Water Quality Prediction and Unsafe Water Detection Application using Random Forest Machine Learning.">
+    <title>AquaGuard AI | Water Quality Prediction & Potability Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Dashboard Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="brand" id="nav-brand">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-droplet-degree"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">AquaGuard <span class="brand-highlight">AI</span></span>
+                    <span class="brand-tagline">Water Quality & Potability Intelligence</span>
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <button class="nav-btn active" data-target="home-page"><i class="fa-solid fa-house"></i> Home</button>
+                <button class="nav-btn" data-target="predict-page"><i class="fa-solid fa-flask-vial"></i> Predict Safety</button>
+                <button class="nav-btn" data-target="dashboard-page"><i class="fa-solid fa-chart-column"></i> ML Dashboard</button>
+                <button class="nav-btn" data-target="history-page"><i class="fa-solid fa-clock-rotate-left"></i> History</button>
+                <button class="nav-btn" data-target="about-page"><i class="fa-solid fa-circle-info"></i> About</button>
+                <button class="nav-btn" data-target="contact-page"><i class="fa-solid fa-envelope"></i> Contact</button>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="cta-mini-btn nav-btn" data-target="predict-page">
+                    <i class="fa-solid fa-bolt"></i> Test Sample
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+
+        <!-- ================= HOME PAGE ================= -->
+        <section id="home-page" class="page-section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <div class="badge-pill"><i class="fa-solid fa-shield-halved"></i> WHO & EPA Water Safety Intelligence</div>
+                    <h1 class="hero-title">AI-Powered Water Quality Prediction & Safety Detection</h1>
+                    <p class="hero-subtitle">
+                        Leverage Random Forest Machine Learning trained on global water potability parameters to accurately classify drinking water safety in real-time.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary btn-lg nav-btn" data-target="predict-page">
+                            <i class="fa-solid fa-vial"></i> Run Water Analysis
+                        </button>
+                        <button class="btn btn-outline btn-lg nav-btn" data-target="dashboard-page">
+                            <i class="fa-solid fa-chart-pie"></i> View Dataset Dashboard
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-card-glass">
+                        <div class="glass-header">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                            <span class="glass-title"><i class="fa-solid fa-microchip"></i> ML Classification Engine</span>
+                        </div>
+                        <div class="hero-stats-preview">
+                            <div class="stat-box">
+                                <span class="stat-label">Model Accuracy</span>
+                                <span class="stat-value text-gradient" id="hero-stat-acc">88.5%</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Target Features</span>
+                                <span class="stat-value">9 Parameters</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-label">Dataset Samples</span>
+                                <span class="stat-value">3,276 Tests</span>
+                            </div>
+                        </div>
+                        <div class="hero-status-pill green">
+                            <i class="fa-solid fa-circle-check"></i> System Operational & Ready
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Cards Section -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon blue"><i class="fa-solid fa-vials"></i></div>
+                    <h3>9 Water Parameters</h3>
+                    <p>Analyzes pH, Hardness, Solids (TDS), Chloramines, Sulfate, Conductivity, Organic Carbon, Trihalomethanes & Turbidity.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon cyan"><i class="fa-solid fa-brain"></i></div>
+                    <h3>Random Forest Classifier</h3>
+                    <p>Ensemble machine learning model trained with feature scaling & missing data median imputation for high accuracy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon green"><i class="fa-solid fa-gauge-high"></i></div>
+                    <h3>Confidence & Compliance</h3>
+                    <p>Instant visual color-coded safe/unsafe verdict, probability breakdown, and parameter-by-parameter WHO range comparison.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon purple"><i class="fa-solid fa-file-csv"></i></div>
+                    <h3>History & Export</h3>
+                    <p>Log all water test results, inspect historical records, and export predictions to downloadable CSV files.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PREDICTION PAGE ================= -->
+        <section id="predict-page" class="page-section">
+            <div class="section-header center">
+                <span class="section-tag">Water Safety Assessment</span>
+                <h2>Water Quality Prediction Tool</h2>
+                <p>Input your water chemical & physical properties below or select a sample preset to evaluate drinking potability.</p>
+            </div>
+
+            <!-- Presets Toolbar -->
+            <div class="presets-toolbar">
+                <span class="presets-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Quick Presets:</span>
+                <div class="preset-buttons" id="preset-buttons-container">
+                    <button type="button" class="preset-btn" data-preset="clean_tap">
+                        <i class="fa-solid fa-faucet-drip"></i> Clean Tap Water
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="mineral_spring">
+                        <i class="fa-solid fa-mountain-sun"></i> Mineral Spring Water
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="contaminated_river">
+                        <i class="fa-solid fa-water"></i> Contaminated Pond Water
+                    </button>
+                    <button type="button" class="preset-btn" data-preset="acid_mine_water">
+                        <i class="fa-solid fa-industry"></i> Acidic Drainage Water
+                    </button>
+                </div>
+            </div>
+
+            <div class="prediction-layout">
+                <!-- Inputs Form -->
+                <div class="prediction-form-card">
+                    <form id="water-predict-form" novalidate>
+                        <div class="form-grid">
+                            
+                            <!-- pH Level -->
+                            <div class="form-group">
+                                <label for="input-ph">
+                                    pH Level (0.0 - 14.0)
+                                    <span class="tooltip" title="Acidity or alkalinity measure. WHO safe range: 6.5 - 8.5"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-droplet input-icon"></i>
+                                    <input type="number" id="input-ph" name="ph" step="0.01" min="0" max="14" placeholder="e.g. 7.2" required>
+                                </div>
+                                <span class="input-hint">WHO Target: 6.5 - 8.5</span>
+                            </div>
+
+                            <!-- Hardness -->
+                            <div class="form-group">
+                                <label for="input-hardness">
+                                    Hardness (mg/L)
+                                    <span class="tooltip" title="Capacity of water to precipitate soap. Recommended: 60-250 mg/L"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-cubes input-icon"></i>
+                                    <input type="number" id="input-hardness" name="Hardness" step="0.1" min="0" max="500" placeholder="e.g. 195.0" required>
+                                </div>
+                                <span class="input-hint">Standard Range: 60 - 250 mg/L</span>
+                            </div>
+
+                            <!-- Total Dissolved Solids (Solids) -->
+                            <div class="form-group">
+                                <label for="input-solids">
+                                    Solids / TDS (ppm)
+                                    <span class="tooltip" title="Total dissolved mineral solids in parts per million. Recommended: < 25,000 ppm"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-filter input-icon"></i>
+                                    <input type="number" id="input-solids" name="Solids" step="1" min="0" max="70000" placeholder="e.g. 20000" required>
+                                </div>
+                                <span class="input-hint">Recommended Limit: < 25,000 ppm</span>
+                            </div>
+
+                            <!-- Chloramines -->
+                            <div class="form-group">
+                                <label for="input-chloramines">
+                                    Chloramines (ppm)
+                                    <span class="tooltip" title="Disinfectant residual concentration. Safe level: 4.0 - 8.0 ppm"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-shield-virus input-icon"></i>
+                                    <input type="number" id="input-chloramines" name="Chloramines" step="0.01" min="0" max="20" placeholder="e.g. 7.1" required>
+                                </div>
+                                <span class="input-hint">Safe Level: 4.0 - 8.0 ppm</span>
+                            </div>
+
+                            <!-- Sulfate -->
+                            <div class="form-group">
+                                <label for="input-sulfate">
+                                    Sulfate (mg/L)
+                                    <span class="tooltip" title="Dissolved inorganic sulfate. Standard level: 150 - 350 mg/L"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-atom input-icon"></i>
+                                    <input type="number" id="input-sulfate" name="Sulfate" step="0.1" min="0" max="600" placeholder="e.g. 330.0" required>
+                                </div>
+                                <span class="input-hint">Standard Range: 150 - 350 mg/L</span>
+                            </div>
+
+                            <!-- Conductivity -->
+                            <div class="form-group">
+                                <label for="input-conductivity">
+                                    Conductivity (μS/cm)
+                                    <span class="tooltip" title="Electrical conductivity measure. Recommended: 200 - 500 μS/cm"><i class="fa-solid fa-bolt input-icon"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-bolt input-icon"></i>
+                                    <input type="number" id="input-conductivity" name="Conductivity" step="0.1" min="0" max="1000" placeholder="e.g. 420.0" required>
+                                </div>
+                                <span class="input-hint">Standard Limit: < 500 μS/cm</span>
+                            </div>
+
+                            <!-- Organic Carbon -->
+                            <div class="form-group">
+                                <label for="input-organic-carbon">
+                                    Organic Carbon (ppm)
+                                    <span class="tooltip" title="Total organic carbon level. Safe level: < 16 ppm"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-leaf input-icon"></i>
+                                    <input type="number" id="input-organic-carbon" name="Organic_carbon" step="0.1" min="0" max="40" placeholder="e.g. 14.0" required>
+                                </div>
+                                <span class="input-hint">Clean Water Threshold: < 16 ppm</span>
+                            </div>
+
+                            <!-- Trihalomethanes -->
+                            <div class="form-group">
+                                <label for="input-trihalomethanes">
+                                    Trihalomethanes (μg/L)
+                                    <span class="tooltip" title="By-product of chlorination. Safe upper limit: < 80 μg/L"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-skull-crossbones input-icon"></i>
+                                    <input type="number" id="input-trihalomethanes" name="Trihalomethanes" step="0.1" min="0" max="150" placeholder="e.g. 65.0" required>
+                                </div>
+                                <span class="input-hint">Safe Maximum Limit: < 80 μg/L</span>
+                            </div>
+
+                            <!-- Turbidity -->
+                            <div class="form-group">
+                                <label for="input-turbidity">
+                                    Turbidity (NTU)
+                                    <span class="tooltip" title="Clarity/cloudiness of water. Optimal clarity: < 4.5 NTU"><i class="fa-solid fa-circle-question"></i></span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-eye-low-vision input-icon"></i>
+                                    <input type="number" id="input-turbidity" name="Turbidity" step="0.01" min="0" max="15" placeholder="e.g. 3.8" required>
+                                </div>
+                                <span class="input-hint">Optimal Clarity: < 4.5 NTU</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Form Error Message Box -->
+                        <div id="form-error-alert" class="alert-box error hidden">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span id="form-error-text">Please fill out all parameter fields accurately.</span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" id="predict-submit-btn">
+                                <i class="fa-solid fa-circle-play"></i> Predict Water Safety
+                            </button>
+                            <button type="button" class="btn btn-ghost" id="reset-form-btn">
+                                <i class="fa-solid fa-rotate-left"></i> Reset Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Prediction Results Display Box -->
+                <div class="prediction-results-card" id="results-card">
+                    <div class="results-placeholder" id="results-placeholder">
+                        <div class="placeholder-icon">
+                            <i class="fa-solid fa-flask-vial"></i>
+                        </div>
+                        <h3>Awaiting Sample Analysis</h3>
+                        <p>Fill in the 9 water parameters on the left or click a Preset button above to run the machine learning classifier.</p>
+                    </div>
+
+                    <div class="results-active-content hidden" id="results-content">
+                        <!-- Result Badge -->
+                        <div class="result-badge-container" id="result-badge-box">
+                            <div class="result-icon-large" id="result-status-icon">
+                                <i class="fa-solid fa-shield-check"></i>
+                            </div>
+                            <div class="result-text-group">
+                                <span class="result-subtitle">Classification Verdict</span>
+                                <h2 class="result-title" id="result-label">Safe for Drinking</h2>
+                            </div>
+                        </div>
+
+                        <!-- Confidence Gauge & Probabilities -->
+                        <div class="confidence-section">
+                            <div class="confidence-header">
+                                <span>Prediction Confidence</span>
+                                <span class="confidence-val" id="result-confidence-val">94.5%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="confidence-bar-fill" style="width: 94.5%;"></div>
+                            </div>
+                            
+                            <div class="probability-split">
+                                <div class="prob-chip safe">
+                                    <span class="prob-dot"></span> Safe Probability: <strong id="safe-prob-val">94.5%</strong>
+                                </div>
+                                <div class="prob-chip unsafe">
+                                    <span class="prob-dot"></span> Unsafe Probability: <strong id="unsafe-prob-val">5.5%</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recommendation Callout -->
+                        <div class="recommendation-box" id="result-recommendation-box">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span id="result-recommendation-text">This water sample satisfies standard drinking water thresholds.</span>
+                        </div>
+
+                        <!-- Parameter Summary Table -->
+                        <div class="summary-table-section">
+                            <h4><i class="fa-solid fa-list-check"></i> Parameter Compliance Summary</h4>
+                            <div class="table-responsive">
+                                <table class="compliance-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Entered Value</th>
+                                            <th>Standard Target</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="compliance-table-body">
+                                        <!-- Dynamically generated rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="save-history-action">
+                            <button class="btn btn-outline btn-block" id="add-to-history-btn">
+                                <i class="fa-solid fa-bookmark"></i> Log to Prediction History
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= ML DASHBOARD PAGE ================= -->
+        <section id="dashboard-page" class="page-section">
+            <div class="section-header center">
+                <span class="section-tag">Machine Learning Analytics</span>
+                <h2>Dataset & Model Performance Dashboard</h2>
+                <p>Exploratory data analysis, Random Forest evaluation metrics, and feature importance rankings.</p>
+            </div>
+
+            <!-- Model Evaluation KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon blue"><i class="fa-solid fa-bullseye"></i></div>
+                    <div class="kpi-info">
+                        <span class="kpi-title">Model Accuracy</span>
+                        <h3 class="kpi-value" id="kpi-accuracy">--</h3>
+                        <span class="kpi-sub">Testing accuracy rate</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon cyan"><i class="fa-solid fa-crosshair"></i></div>
+                    <div class="kpi-info">
+                        <span class="kpi-title">Precision</span>
+                        <h3 class="kpi-value" id="kpi-precision">--</h3>
+                        <span class="kpi-sub">Positive predictive value</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon green"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+                    <div class="kpi-info">
+                        <span class="kpi-title">Recall</span>
+                        <h3 class="kpi-value" id="kpi-recall">--</h3>
+                        <span class="kpi-sub">Sensitivity score</span>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon purple"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="kpi-info">
+                        <span class="kpi-title">F1-Score</span>
+                        <h3 class="kpi-value" id="kpi-f1">--</h3>
+                        <span class="kpi-sub">Harmonic mean precision/recall</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                
+                <!-- Chart 1: Safe vs Unsafe Distribution -->
+                <div class="chart-card">
+                    <div class="chart-card-header">
+                        <h3><i class="fa-solid fa-chart-pie"></i> Water Potability Class Distribution</h3>
+                        <span class="chart-badge">Target Variable</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-potability-pie"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Feature Importance -->
+                <div class="chart-card">
+                    <div class="chart-card-header">
+                        <h3><i class="fa-solid fa-ranking-star"></i> Random Forest Feature Importances</h3>
+                        <span class="chart-badge">Feature Weights</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-feature-importance"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: pH Distribution Histogram -->
+                <div class="chart-card">
+                    <div class="chart-card-header">
+                        <h3><i class="fa-solid fa-chart-simple"></i> Distribution of Water pH Levels</h3>
+                        <span class="chart-badge">pH Histogram</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-ph-distribution"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 4: Correlation Matrix Grid -->
+                <div class="chart-card">
+                    <div class="chart-card-header">
+                        <h3><i class="fa-solid fa-border-all"></i> Parameter Correlation Matrix</h3>
+                        <span class="chart-badge">Inter-feature Correlations</span>
+                    </div>
+                    <div class="heatmap-wrapper" id="heatmap-container">
+                        <!-- Correlation Heatmap table dynamically built in JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= PREDICTION HISTORY PAGE ================= -->
+        <section id="history-page" class="page-section">
+            <div class="section-header">
+                <div>
+                    <span class="section-tag">Audit Trail</span>
+                    <h2>Prediction History Logs</h2>
+                </div>
+                <div class="history-actions">
+                    <button class="btn btn-outline" id="export-csv-btn">
+                        <i class="fa-solid fa-file-arrow-down"></i> Export History as CSV
+                    </button>
+                    <button class="btn btn-ghost danger" id="clear-history-btn">
+                        <i class="fa-solid fa-trash-can"></i> Clear History
+                    </button>
+                </div>
+            </div>
+
+            <!-- History Search & Stats -->
+            <div class="history-filter-bar">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="history-search-input" placeholder="Search by result, timestamp, or pH level...">
+                </div>
+                <div class="history-counter">
+                    Logged Samples: <strong id="history-count-badge">0</strong>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="history-table-card">
+                <div class="table-responsive">
+                    <table class="data-table" id="history-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Timestamp</th>
+                                <th>Sample Verdict</th>
+                                <th>Confidence</th>
+                                <th>pH</th>
+                                <th>Hardness</th>
+                                <th>Solids</th>
+                                <th>Chloramines</th>
+                                <th>Sulfate</th>
+                                <th>Turbidity</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-table-body">
+                            <!-- Populated dynamically via app.js -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="empty-state hidden" id="history-empty">
+                    <i class="fa-solid fa-box-open"></i>
+                    <h3>No Prediction History Found</h3>
+                    <p>Run a water sample analysis on the Predict page to log your test results here.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT PAGE ================= -->
+        <section id="about-page" class="page-section">
+            <div class="about-hero">
+                <span class="section-tag">Project Overview</span>
+                <h2>About Water Quality Prediction & Safety Detection</h2>
+                <p class="about-lead">
+                    Clean, potable water is fundamental to human health and ecological sustainability. This application utilizes Machine Learning to rapidly assess water potability based on key chemical and physical indicators defined by the World Health Organization (WHO).
+                </p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>The Dataset</h3>
+                    <p>
+                        The model is trained on the standard <strong>Water Potability Dataset</strong> containing 3,276 water body measurements. Features include pH, Hardness, Solids, Chloramines, Sulfate, Conductivity, Organic Carbon, Trihalomethanes, and Turbidity.
+                    </p>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h3>Machine Learning Pipeline</h3>
+                    <p>
+                        Our preprocessing pipeline uses median value imputation to handle non-random missing data, followed by Z-score standard scaling. Classification is performed using an optimized <strong>Random Forest Classifier</strong> ensemble for maximum generalization.
+                    </p>
+                </div>
+
+                <div class="about-card">
+                    <div class="about-icon"><i class="fa-solid fa-flask"></i></div>
+                    <h3>Key Safety Parameters</h3>
+                    <ul class="about-list">
+                        <li><strong>pH:</strong> Measures hydrogen-ion concentration (WHO target: 6.5 - 8.5).</li>
+                        <li><strong>Solids (TDS):</strong> Total dissolved minerals and salts in ppm.</li>
+                        <li><strong>Chloramines:</strong> Disinfectant levels to prevent pathogen growth.</li>
+                        <li><strong>Trihalomethanes:</strong> Chlorination by-products requiring strict upper bounds.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTACT PAGE ================= -->
+        <section id="contact-page" class="page-section">
+            <div class="section-header center">
+                <span class="section-tag">Get in Touch</span>
+                <h2>Contact & Support</h2>
+                <p>Have questions about water testing metrics, model API integration, or research collaborations?</p>
+            </div>
+
+            <div class="contact-layout">
+                <div class="contact-info-card">
+                    <h3>AquaGuard AI Support</h3>
+                    <p>Water Quality Intelligence & Environmental Analytics Team.</p>
+
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <strong>Location</strong>
+                            <p>Global Water Safety Lab & Research Center</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <strong>Email</strong>
+                            <p>support@aquaguard-ai.org</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <strong>Helpline</strong>
+                            <p>+1 (800) 555-AQUA</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-card">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Full Name</label>
+                            <input type="text" id="contact-name" placeholder="John Doe" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-email">Email Address</label>
+                            <input type="email" id="contact-email" placeholder="john@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" placeholder="Water Quality Research Inquiry" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" rows="4" placeholder="How can we assist you with water potability analysis?" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa-solid fa-paper-plane"></i> Send Message
+                        </button>
+                        
+                        <div id="contact-success-msg" class="alert-box success hidden mt-3">
+                            <i class="fa-solid fa-circle-check"></i> Thank you! Your message has been sent successfully.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fa-solid fa-droplet-degree"></i> AquaGuard AI
+            </div>
+            <p>&copy; 2026 Water Quality Prediction and Unsafe Water Detection Application. Built with Random Forest ML & Flask.</p>
+            <div class="footer-links">
+                <a href="#about" class="nav-btn" data-target="about-page">About</a>
+                <a href="#predict" class="nav-btn" data-target="predict-page">Predictor</a>
+                <a href="#dashboard" class="nav-btn" data-target="dashboard-page">Dashboard</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- App Scripts -->
+    <script src="js/dashboard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
